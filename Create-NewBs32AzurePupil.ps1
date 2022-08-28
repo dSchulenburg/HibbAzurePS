@@ -1,4 +1,4 @@
-﻿<#
+<#
 .Synopsis
    
    Erstellt im Microsoft AzureAD einer HIBB-Schule (Standartwerte: hier der BS32) einen neuen Schüler gemäß der vorgaben des HIBB und CanCom. Es wird das offizielle AzureAD Modul benötigt. Führen sie also vor der Nutzung von Create-BS32User install-Module AzureAd aus.Quelle ist eine .csv die Vorname,Nachname, Klasse enthält.
@@ -58,7 +58,6 @@ function Create-BsHibbUser
         # optional Einschalten des Loggings 
         [switch]$logging=$false,
         #optional alternativer Logpath Standartwert ist das aktuelle ist das aktuelle Verzeichnis
-        [String]$logpath = ".\"
     )
     Begin
     {
@@ -70,9 +69,15 @@ function Create-BsHibbUser
         if($logging)
         {
             Write-Verbose "Logging eingeschaltet"
-            $timestamp = Get-Date -UFormat "%d.%m.%Y_%R"
-            New-Item "$logpath create_AzureUsersLog_$timestamp.txt" -ErrorAction SilentlyC2424ontinue -ErrorVariable $myerr
+            $timestamp = Get-Date -UFormat "%d%m%Y"
+            $rnd = Get-Random
+            $logpath = "azureAD" + $timestamp + $rnd
+            $logpath += ".txt" 
+            New-Item -Path . -Name $logpath -ErrorAction SilentlyContinue -ErrorVariable myerr
              
+             if($myerr){
+            write-Verbose $myerr
+            }
         }
     }
     Process
@@ -96,11 +101,13 @@ function Create-BsHibbUser
 #error handling
         New-AzureADUser -UserPrincipalName $upn -DisplayName $dpn -Department $userType -JobTitle $cl -AccountEnabled $true -PasswordProfile $PasswordProfile -MailNickName "BS-32-SchülerIn" -ErrorAction SilentlyContinue -ErrorVariable azureError
         if (! $azureError){
-            "$upn, $dpn, - erstellt" | Add-Content $log
+            "$upn, $dpn, - erstellt" | Add-Content $logpath
             $send += 1
 
         }else{
-            "$azureError" | Add-Content $log
+            $azureError.message | Add-Content $logpath
+            $upn | Add-Content $logpath
+
             $error += 1
         }    
     }
