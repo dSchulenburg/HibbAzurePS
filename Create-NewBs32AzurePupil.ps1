@@ -72,7 +72,7 @@ function Create-BsHibbUser
             $rnd = Get-Random
             $logpath = ".\azureAD" + $timestamp + $rnd
             $logpath += ".txt" 
-            New-Item -Path . -Name $logpath -ErrorAction SilentlyContinue -ErrorVariable myerr
+            New-Item -Path $logpath -ErrorAction SilentlyContinue -ErrorVariable myerr
              
              if($myerr){
             write-Verbose $myerr
