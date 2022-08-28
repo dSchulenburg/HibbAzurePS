@@ -24,7 +24,7 @@
                                         Nachname = 'PowerShell'
                                         Klasse    = 'TG2202'
                                         }
-        $einSchueler | create-BsHibbUser
+        $einSchueler | create-BsHibbUser -logging -verbose
 
 .EXAMPLE
         Viele Schüler anlegen, (Szenario: Schuljahres beginn) und Logging einschalten
@@ -56,8 +56,7 @@ function Create-BsHibbUser
         # optional Azure-Schuldomain default: '@bs32hh.onmicrosoft.com' 
         [String]$domain = '@bs32hh.onmicrosoft.com',
         # optional Einschalten des Loggings 
-        [switch]$logging=$false,
-        #optional alternativer Logpath Standartwert ist das aktuelle ist das aktuelle Verzeichnis
+        [switch]$logging=$false
     )
     Begin
     {
