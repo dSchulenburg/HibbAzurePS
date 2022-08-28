@@ -20,8 +20,8 @@
    
         # Einen Schüler erstellen der BS32 erstellen
         $einSchueler = [PSCustomObject]@{
-                                        Vorname     = 'Kevin'
-                                        Nachname = 'PowerShell'
+                                        Vorname     = 'Kevün'
+                                        Nachname = 'PöwerShéll'
                                         Klasse    = 'TG2202'
                                         }
         $einSchueler | create-BsHibbUser -logging -verbose
