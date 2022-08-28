@@ -63,7 +63,7 @@ function Create-BsHibbUser
     {
         $send = 0
         $error = 0
-        $credObject | Get-Credential
+        $credObject = Get-Credential
         Connect-AzureAD -Credential $credObject
         
         if($logging)
@@ -71,7 +71,7 @@ function Create-BsHibbUser
             Write-Verbose "Logging eingeschaltet"
             $timestamp = Get-Date -UFormat "%d%m%Y"
             $rnd = Get-Random
-            $logpath = "azureAD" + $timestamp + $rnd
+            $logpath = ".\azureAD" + $timestamp + $rnd
             $logpath += ".txt" 
             New-Item -Path . -Name $logpath -ErrorAction SilentlyContinue -ErrorVariable myerr
              
