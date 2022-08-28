@@ -10,3 +10,18 @@ install-module AzureAd
 
 ein.
 ## Herrunterladen und Ausführen
+
+Laden Sie die Datei Create-NewBs32AzurePupil.ps1 in ein Verzeichnis Ihrer wahl herrunter. Wechseln Sie in Powershell in dieses Verzeichnis
+
+PS> cd <IhrVerzeichnis>
+
+und geben:
+
+./Create-NewBs32AzurePupil.ps1
+
+ein. Nun steht der Befehl create-BsHibbUser zur Verfügung.
+
+## Hilfe und Verwendung
+
+get-help create-BsHibbUser -Examples
+
